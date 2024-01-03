@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-
+// /for access cros platform
+var cors = require("cors");
+app.use(cors({ orgin: "*" }));
+//// for json format
+app.use(express.json());
+var signinrouter = require("./routes/signin");
 const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const uri = process.env.MONGODB_CONNECT_URI;
@@ -13,7 +18,7 @@ mongoose.connection.on("connected", () => {
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
+app.use("/signin", signinrouter);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
