@@ -15,11 +15,11 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     joined_on: {
-      type: date,
-      default: date.now(),
+      type: Date,
+      default: Date.now(),
     },
     forgetpassword: {
-      time: date,
+      time: Date,
       otp: String,
     },
     token: {
@@ -30,4 +30,4 @@ const userSchema = new mongoose.Schema(
     collection: "userSchema",
   }
 );
-module.exports = mongoose.model("userSchema", verifySchema);
+module.exports = mongoose.model("userSchema", userSchema);
