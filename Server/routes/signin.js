@@ -1,21 +1,23 @@
 const express = require("express");
 var router = express.Router();
 const { CheckUser } = require("../controllers/login.js");
+const { InsertVerifyUser } = require("../controllers/signin.js");
+
 router.get("/", (req, res) => {
   res.send("Hi");
 });
 router.post("/verify", async (req, res) => {
   try {
     const { name, email, password } = await req.body;
-    console.log(name, email);
     registerUser = await CheckUser(email);
     if (registerUser === false) {
-    } else if (registerUser === true) {
+      InsertVerifyUser(name, email, password);
       res.status(200).send(true);
+    } else if (registerUser === true) {
+      res.status(200).send(false);
     } else {
-      res.status(500).send("Server Busy");
+      res.status(500);
     }
-    res.send(await CheckUser(email));
   } catch (e) {
     console.log("Error:" + e);
   }

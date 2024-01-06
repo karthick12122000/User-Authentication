@@ -19,8 +19,8 @@ function SendMail(toEmail, subject, content) {
     if (error) {
       console.log("Error:" + error);
     } else {
-      console.log("Response:" + info);
+      console.log("Mail Sent successfully");
     }
   });
 }
-module.exports = SendMail;
+module.exports = { SendMail };
