@@ -1,10 +1,15 @@
 const express = require("express");
 var router = express.Router();
 const { CheckUser } = require("../controllers/login.js");
-const { InsertVerifyUser } = require("../controllers/signin.js");
+const { InsertVerifyUser, InsertUser } = require("../controllers/signin.js");
 
-router.get("/", (req, res) => {
-  res.send("Hi");
+router.get("/:token", async (req, res) => {
+  try {
+    const reponse = await InsertUser(req.params.token);
+    res.status(200).send(reponse);
+  } catch (e) {
+    res.status(500).send("Unexpected Error Happened");
+  }
 });
 router.post("/verify", async (req, res) => {
   try {
