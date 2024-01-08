@@ -7,7 +7,8 @@ var cors = require("cors");
 app.use(cors({ orgin: "*" }));
 //// for json format
 app.use(express.json());
-var signinrouter = require("./routes/signin");
+var signuprouter = require("./routes/signin");
+var signinrouter = require("./routes/login");
 
 const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.use("/signup", signuprouter);
 app.use("/signin", signinrouter);
 
 app.listen(port, () => {

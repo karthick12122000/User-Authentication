@@ -20,7 +20,7 @@ async function InsertVerifyUser(name, email, password) {
       token: token,
     });
     await newUser.save();
-    const activationlink = `http://localhost:3000/signin/${token}`;
+    const activationlink = `http://localhost:3000/signup/${token}`;
     const content = `<h4>Hi there,</h4>
     <h5>Welcome to the app</h5>
     <p>Thanks for signing up. Click the below link to activate</p>
