@@ -2,9 +2,8 @@ const users = require("../models/user.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const { response, json } = require("express");
-const client = require("../routes/redis.js");
-
+const RedisClient = require("../routes/redis.js");
+// RedisClient.connect();
 dotenv.config();
 async function CheckUser(email) {
   try {
@@ -32,7 +31,11 @@ async function AuthenticateUser(email, password) {
           token: token,
           status: true,
         };
-        await client.set(`key-${email}`, JSON.stringify(response));
+
+        if (RedisClient) {
+          await RedisClient.set(`key-${email}`, JSON.stringify(response));
+        }
+
         await users.findOneAndUpdate(
           { email: userCheck.email },
           { $set: { token: token } },
