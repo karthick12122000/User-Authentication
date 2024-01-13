@@ -9,7 +9,7 @@ app.use(cors({ orgin: "*" }));
 app.use(express.json());
 var signuprouter = require("./routes/signin");
 var signinrouter = require("./routes/login");
-
+var homerouter = require("./routes/home");
 const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const uri = process.env.MONGODB_CONNECT_URI;
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 
 app.use("/signup", signuprouter);
 app.use("/signin", signinrouter);
-
+app.use("/home", homerouter);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
