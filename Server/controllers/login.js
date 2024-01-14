@@ -50,4 +50,28 @@ async function AuthenticateUser(email, password) {
     return "Server busy";
   }
 }
-module.exports = { CheckUser, AuthenticateUser };
+
+async function AuthorizeUser(token) {
+  try {
+    const decodeToken = jwt.verify(token, process.env.loginsecret_token);
+
+    if (decodeToken) {
+      const email = decodeToken;
+      const auth = await RedisClient.get(`key-${email}`);
+
+      if (auth) {
+        const data = JSON.parse(auth);
+
+        return data;
+      } else {
+        const data = await users.findOne({ email: email });
+
+        return data;
+      }
+    }
+    return false;
+  } catch (error) {
+    console.log(e);
+  }
+}
+module.exports = { CheckUser, AuthenticateUser, AuthorizeUser };
