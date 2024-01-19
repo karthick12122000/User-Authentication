@@ -15,3 +15,8 @@ main {
 footer {
   height: 20%;
 }
+.error::after {
+  content: "";
+  color: rgb(255, 38, 0);
+  font-size: 0.9rem;
+}
