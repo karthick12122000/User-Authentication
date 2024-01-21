@@ -7,7 +7,7 @@ var cors = require("cors");
 app.use(cors({ orgin: "*" }));
 //// for json format
 app.use(express.json());
-var signuprouter = require("./routes/signin");
+var signuprouter = require("./routes/signup");
 var signinrouter = require("./routes/login");
 var homerouter = require("./routes/home");
 const port = process.env.PORT || 3000;

@@ -1,7 +1,7 @@
 const express = require("express");
 var router = express.Router();
 const { CheckUser } = require("../controllers/login.js");
-const { InsertVerifyUser, InsertUser } = require("../controllers/signin.js");
+const { InsertVerifyUser, InsertUser } = require("../controllers/signup.js");
 
 router.get("/:token", async (req, res) => {
   try {

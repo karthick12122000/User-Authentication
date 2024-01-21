@@ -1,5 +1,5 @@
 import API_URI from "./config/global.js";
-console.log(API_URI);
+import signup from "./controllers/signup.js";
 function validateForm() {
   const name = document.getElementById("floatingName");
   const nameerr = document.getElementById("nameerr");
@@ -12,9 +12,7 @@ function validateForm() {
   }
   const email = document.getElementById("floatingInput");
   const emailerr = document.getElementById("emailerr");
-  var emailPattern = new RegExp(
-    "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/"
-  );
+  var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
   if (email.value === "") {
     flag = true;
     emailerr.innerText = "Email should not be empty!";
@@ -49,6 +47,14 @@ function validateForm() {
   }
   return true;
 }
-document.getElementById("signup").addEventListener("click", () => {
-  validateForm();
+document.getElementById("signup").addEventListener("click", async () => {
+  let form = await validateForm();
+  if (form) {
+    const name = document.getElementById("floatingName");
+    const email = document.getElementById("floatingInput");
+
+    const confrimPassword = document.getElementById("floatingConfrimPassword");
+
+    signup(name.value, email.value, confrimPassword.value);
+  }
 });
