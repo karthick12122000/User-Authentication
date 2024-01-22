@@ -27,9 +27,13 @@ function validateForm() {
   if (password.value === "") {
     flag = true;
     Passworderr.innerText = "Password  should not be empty!";
+  } else if (password.value.length < 8) {
+    flag = true;
+    Passworderr.innerText = "Password cannot be less than 8 characters";
   } else {
     Passworderr.innerText = "";
   }
+
   const confrimPassword = document.getElementById("floatingConfrimPassword");
   const ConfrimPassworderr = document.getElementById("ConfrimPassworderr");
 
@@ -55,6 +59,13 @@ document.getElementById("signup").addEventListener("click", async () => {
 
     const confrimPassword = document.getElementById("floatingConfrimPassword");
 
-    signup(name.value, email.value, confrimPassword.value);
+    let response = await signup(name.value, email.value, confrimPassword.value);
+    if (response) {
+      let signupF = document.getElementById("signupF");
+      signupF.style.display = "none";
+    } else {
+      const emailerr = document.getElementById("emailerr");
+      emailerr.innerText = "An account already exists for this email address.";
+    }
   }
 });

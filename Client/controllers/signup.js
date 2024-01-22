@@ -13,12 +13,13 @@ async function signup(name, email, password) {
         throw new Error(`Request failed with status: ${response.status}`);
       }
       const data = await response.json();
-      console.log(data);
+      return data;
     } catch (err) {
       console.error("Error:", err);
     }
   } catch (error) {
     console.log(error);
   }
+  return "error";
 }
 export default signup;

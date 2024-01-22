@@ -7,10 +7,10 @@ body {
   height: 100vh;
 }
 header {
-  height: 20%;
+  height: 10%;
 }
 main {
-  height: 60%;
+  min-height: 60%;
 }
 footer {
   height: 20%;
