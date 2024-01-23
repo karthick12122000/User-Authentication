@@ -18,9 +18,6 @@ mongoose.connect(uri);
 mongoose.connection.on("connected", () => {
   console.log("MongoDB Connected");
 });
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
 app.use("/signup", signuprouter);
 app.use("/signin", signinrouter);

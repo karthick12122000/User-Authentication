@@ -13,9 +13,12 @@ main {
   min-height: 60%;
 }
 footer {
-  height: 20%;
+  min-height: 30%;
 }
 .form-floating p {
   color: rgb(255, 38, 0);
   font-size: 0.8rem;
+}
+.tick {
+  fill: aqua;
 }

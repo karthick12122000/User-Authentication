@@ -52,20 +52,43 @@ function validateForm() {
   return true;
 }
 document.getElementById("signup").addEventListener("click", async () => {
-  let form = await validateForm();
-  if (form) {
-    const name = document.getElementById("floatingName");
-    const email = document.getElementById("floatingInput");
+  const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
+  if (alertPlaceholder.innerHTML == "") {
+    let form = await validateForm();
+    if (form) {
+      const name = document.getElementById("floatingName");
+      const email = document.getElementById("floatingInput");
 
-    const confrimPassword = document.getElementById("floatingConfrimPassword");
+      const confrimPassword = document.getElementById(
+        "floatingConfrimPassword"
+      );
 
-    let response = await signup(name.value, email.value, confrimPassword.value);
-    if (response) {
-      let signupF = document.getElementById("signupF");
-      signupF.style.display = "none";
-    } else {
-      const emailerr = document.getElementById("emailerr");
-      emailerr.innerText = "An account already exists for this email address.";
+      let response = await signup(
+        name.value,
+        email.value,
+        confrimPassword.value
+      );
+      if (response) {
+        let signupF = document.getElementById("signupF");
+        // signupF.style.display = "none";
+
+        const appendAlert = (message, type) => {
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            "</div>",
+          ].join("");
+
+          alertPlaceholder.append(wrapper);
+        };
+
+        appendAlert("Please check your email for verification.", "success");
+      } else {
+        const emailerr = document.getElementById("emailerr");
+        emailerr.innerText =
+          "An account already exists for this email address.";
+      }
     }
   }
 });
