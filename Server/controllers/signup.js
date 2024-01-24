@@ -1,9 +1,10 @@
+const mongoose = require("mongoose");
 const VerifyUser = require("../models/verifyusers");
 const newUser = require("../models/user");
 
 const { SendMail } = require("./sendmail");
 const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
+
 const dotenv = require("dotenv");
 dotenv.config();
 var jwt = require("jsonwebtoken");
@@ -20,13 +21,11 @@ async function InsertVerifyUser(name, email, password) {
       token: token,
     });
     await newUser.save();
-    const activationlink = `http://localhost:3000/signup/${token}`;
-    const content = `<h4>Hi there,</h4>
-    <h5>Welcome to the app</h5>
-    <p>Thanks for signing up. Click the below link to activate</p>
-    <a href=${activationlink}>Click here</a>
-    <p>Regards</p>
-    <p>Team</p>`;
+    const activationlink = process.env.signupurl + token;
+
+    const { verification_content } = require("../pages/verification_email");
+    const content = await verification_content(activationlink);
+
     SendMail(email, "verify user", content);
   } catch (e) {
     console.log(e);
@@ -48,12 +47,8 @@ async function InsertUser(token) {
         forgetpassword: {},
       });
       await user.save();
-      await usersVerify.deleteOne({ token: token });
-      const content = `<h4>Hi there,</h4>
-    <h5>Welcome to the app</h5>
-    <p>You are sucessfully Registered</p>
-    <p>Regards</p>
-    <p>Team</p>`;
+      let res = await VerifyUser.deleteMany({ token: token });
+      const content = require("../pages/reg_success");
       SendMail(user.email, "Registration sucessfully", content);
       return content;
     } else {
