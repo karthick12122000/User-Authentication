@@ -19,8 +19,8 @@
     "nodemailer": "^6.9.8",
     "redis": "^4.6.12"
   },
-  "description": "",
   "devDependencies": {
     "nodemon": "^3.0.2"
-  }
+  },
+  "description": ""
 }
