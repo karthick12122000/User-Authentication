@@ -52,11 +52,13 @@ async function InsertUser(token) {
       SendMail(user.email, "Registration sucessfully", content);
       return content;
     } else {
-      return "Registration failed";
+      const content = require("../pages/reg_failed");
+      return content;
     }
   } catch (error) {
     console.log(error);
-    return "Unexpected Error Happened";
+    const content = require("../pages/server_fails");
+    return content;
   }
 }
 module.exports = { InsertVerifyUser, InsertUser };
