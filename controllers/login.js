@@ -44,7 +44,7 @@ async function AuthenticateUser(email, password) {
         return response;
       }
     }
-    return "Invalid user name and password";
+    return { code: 401, Message: "Invalid user name and password" };
   } catch (error) {
     console.log(error);
     return "Server busy";
