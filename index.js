@@ -10,6 +10,7 @@ app.use(express.json());
 var signuprouter = require("./routes/signup");
 var signinrouter = require("./routes/login");
 var homerouter = require("./routes/home");
+var forgot = require("./routes/forgotpws");
 const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const uri = process.env.MONGODB_CONNECT_URI;
@@ -22,6 +23,7 @@ mongoose.connection.on("connected", () => {
 app.use("/signup", signuprouter);
 app.use("/signin", signinrouter);
 app.use("/home", homerouter);
+app.use("/forgot", forgot);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
