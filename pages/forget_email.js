@@ -1,4 +1,4 @@
-function verification_content(activationlink) {
+function verification_content(email, activationlink) {
   const content = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,10 +53,15 @@ function verification_content(activationlink) {
 </head>
 <body>
   <div class="content">
-    <h4>Hi there,</h4>
-    <h3>Welcome to the app!</h3>
-    <p>Thanks for signing up. Click the below link to activate your account:</p>
-    <p><a href="${activationlink}" target="_blank">Click here to activate</a></p>
+    <h3>Reset your password</h3>
+    <p>Click on the button below within the next 60 minutes to reset your password for your account</p>
+    <p>${email}</p>
+    <a href="${activationlink}" target="_blank"><button style="
+    background: #667df7;
+    color: #ffffff;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1.5px solid #3d2bff;">Reset your password</button></a>
    
     <p>Regards,</p>
     <p class="signature">The Team</p>
