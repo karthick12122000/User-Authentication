@@ -1,8 +1,10 @@
+const mongoose = require("mongoose");
 const { SendMail } = require("./sendmail");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 const { verification_content } = require("../pages/forget_email");
 const users = require("../models/user");
-
+const bcrypt = require("bcrypt");
 function generateToken(email) {
   const token = jwt.sign(email, process.env.secretKey);
 
