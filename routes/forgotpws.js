@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
   console.log(forgotres);
   res.status(200).send({ message: forgotres });
 });
-router.get("/reset", async (req, res) => {
+router.post("/reset", async (req, res) => {
   var { token, password } = req.body;
   const resp = await reset(email, password);
   res.status(200).send(resp);
