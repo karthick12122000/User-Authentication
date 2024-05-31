@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
 });
 router.post("/reset", async (req, res) => {
   var { token, password } = req.body;
-  const resp = await reset(email, password);
+  const resp = await reset(token, password);
   res.status(200).send(resp);
 });
 module.exports = router;
