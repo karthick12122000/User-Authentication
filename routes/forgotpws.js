@@ -11,6 +11,6 @@ router.post("/", async (req, res) => {
 router.post("/reset", async (req, res) => {
   var { token, password } = req.body;
   const resp = await reset(token, password);
-  res.status(200).send(resp);
+  res.status(200).send({ message: resp });
 });
 module.exports = router;
