@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { SendMail } = require("./sendmail");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const { verification_content } = require("../pages/forget_email");
+const { forgot_content } = require("../pages/forget_email");
 const users = require("../models/user");
 const bcrypt = require("bcrypt");
 function generateToken(email) {
@@ -18,7 +18,7 @@ async function forgot(email) {
       const token = generateToken(email);
       const link = process.env.forgoturl + token;
 
-      const content = await verification_content(email, link);
+      const content = await forgot_content(email, link);
       SendMail(email, "Reset Password", content);
       return "Password reset email was sent successfully.";
     } else {

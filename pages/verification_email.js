@@ -1,4 +1,4 @@
-function forgot_content(activationlink) {
+function forgot_content(email, activationlink) {
   const content = `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -81,7 +81,7 @@ function forgot_content(activationlink) {
      
       <div class="content">
         <h2 class="title">Reset your password</h2>
-        <p>Click on the button below within the next 60 minutes to reset your password for your Twilio account <a href="mailto:karthicknammakkal@gmail.com" target="_blank">karthicknammakkal@gmail.com</a>.</p>
+        <p>Click on the button below within the next 60 minutes to reset your password for your account <a href="mailto:${email}" target="_blank">${email}</a>.</p>
         <a class="reset_password_anchor" href="${activationlink}" target="_blank">
           <div class="reset_password_button">Reset your password</div>
         </a>
