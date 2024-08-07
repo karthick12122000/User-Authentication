@@ -30,11 +30,13 @@ async function forgot(email) {
 }
 async function reset(token, password) {
   try {
-    const email = jwt.verify(token, process.env.loginsecret_token);
+    console.log(token);
+    // const email = jwt.verify(token, process.env.loginsecret_token);
+    // console.log(email);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     var user = await users.findOneAndUpdate(
-      { email: email },
+      { token: token },
       { password: hashedPassword }
     );
     if (user != null) {
@@ -42,8 +44,8 @@ async function reset(token, password) {
     }
     return "No user found.";
   } catch (e) {
-    return "Server busy";
     console.log(e);
+    return "Server busy";
   }
 }
 
